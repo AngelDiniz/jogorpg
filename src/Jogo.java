@@ -1,5 +1,6 @@
 import java.util.Scanner;
 
+
 public class Jogo {
 
     Scanner scanner = new Scanner(System.in);
@@ -35,6 +36,7 @@ public class Jogo {
         }
     }
 
+
     public void batalhar(Jogador jogador, Inimigo inimigo) {
         System.out.println("--------------------------------------------");
         System.out.println("Agora escolha um nome para o seu personagem.");
@@ -44,6 +46,7 @@ public class Jogo {
         System.out.println("-------------------------------------------------");
         System.out.println("Jogador(a) " + nome + " prepare-se para a batalha!\n");
         System.out.println("-------------------------------------------------");
+
 
         while (jogador.statusVida() && inimigo.statusVida()) {
             int escolhaJogador = jogador.escolherAcao();
@@ -56,24 +59,29 @@ public class Jogo {
             } else if (escolhaJogador == 1 && escolhaInimigo == 2) {
                 System.out.println("------------------------------------");
                 System.out.println("O inimigo se defendeu do seu ataque!");
+                System.out.println("------------------------------------");
             } else if (escolhaJogador == 2 && escolhaInimigo == 1) {
-                System.out.println("-----------------");
-                System.out.println("Você se defendeu!");
+                System.out.println("----------------------------------------------");
+                System.out.println("O inimigo tentou te atacar e você se defendeu!");
+                System.out.println("----------------------------------------------");
             } else if (escolhaJogador == 2 && escolhaInimigo == 2) {
-                System.out.println("-----------------");
-                System.out.println("Você se defendeu!");
                 System.out.println("-----------------------------");
+                System.out.println("Você se defendeu!");
                 System.out.println("O inimigo também se defendeu!");
+                System.out.println("-----------------------------");
             }
         }
-
         if (jogador.statusVida()) {
-            System.out.println("--------------------------------");
-            System.out.println("Parabéns!!! Você venceu a batalha!");
-            System.out.println("--------------------------------");
-        } else {
+            System.out.println("----------------------------------");
+            System.out.println("\u001B[32m" + "Parabéns!!! Você venceu a batalha!" + "\u001B[0m");
+            System.out.println("----------------------------------");
+        } else if (jogador.getVida() <= 0 && inimigo.getVida() > 0) {
             System.out.println("-------------------");
-            System.out.println("Você foi derrotado!");
+            System.out.println("\u001B[31m" + "Você foi derrotado!" + "\u001B[0m");
+            System.out.println("-------------------");
+        } else if (jogador.getVida() <= 0 && inimigo.getVida() <= 0) {
+            System.out.println("-------------------");
+            System.out.println("Empate!");
             System.out.println("-------------------");
         }
     }
